@@ -6,9 +6,10 @@ const fp = require('fastify-plugin')
 // to export the decorators to the outer scope
 
 module.exports = fp(function (fastify, opts, next) {
-  fastify.decorate('someSupport', function () {
-    return 'hugs'
+  fastify.register(require('fastify-cors'), {
+    // put your options here
   })
+
   next()
 })
 
