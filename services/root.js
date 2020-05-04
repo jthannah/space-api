@@ -4,6 +4,11 @@ const got = require('got')
 const api_key = process.env.NASA_KEY ? process.env.NASA_KEY : "DEMO_KEY";
 
 module.exports = async function (fastify, opts, next) {
+  fastify.get('/image-of-the-day/:date', async function (request, reply) {
+    console.log(request.params.date);
+    const response = await got('https://api.nasa.gov/planetary/apod?api_key=' + api_key + '&date=' + request.params.date)
+    return response.body
+  })
   fastify.get('/image-of-the-day', async function (request, reply) {
     const response = await got('https://api.nasa.gov/planetary/apod?api_key=' + api_key)
     return response.body
